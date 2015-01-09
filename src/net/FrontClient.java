@@ -64,7 +64,7 @@ public class FrontClient extends DatagramSocket implements Runnable {
                     break;
                 }
 
-            P2PConnection client = (P2PConnection) p2p.get(addr);
+            P2PConnection client = (P2PConnection) p2p.get(addr, port);
 
             if (client != null)
                 client.process(buffer);

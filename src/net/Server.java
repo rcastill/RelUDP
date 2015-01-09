@@ -60,7 +60,7 @@ public class Server extends DatagramSocket {
             InetAddress addr = packet.getAddress();
             int port = packet.getPort();
 
-            BackClient client = (BackClient) clients.get(addr);
+            BackClient client = (BackClient) clients.get(addr, port);
 
             System.out.println("Packet received from: " + packet.getAddress().toString() +":"+ packet.getPort());
 
