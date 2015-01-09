@@ -80,8 +80,8 @@ public class FrontClient extends DatagramSocket implements Runnable {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        FrontClient client = new FrontClient("localhost", 5314);
-        ServerConnection server = client.setServer("localhost", 24121);
+        FrontClient client = new FrontClient("192.168.0.19", 5314);
+        ServerConnection server = client.setServer("104.131.173.250", 5428);
 
         client.thread.start();
         server.thread.start();
@@ -98,6 +98,18 @@ public class FrontClient extends DatagramSocket implements Runnable {
 
         System.out.println("Clients");
         System.out.println(clientsPacket.toString());
+
+        if (clientsPacket.getAdresses().length == 1) {
+            ConnectionPacket connPacket;
+
+            while ((connPacket = interpreter.getConnectionNotification()) == null) {
+                System.out.println("Sleeping on notification");
+                Thread.sleep(SERVER_PACKET_SLEEP_TIME);
+            }
+
+            System.out.println("Notification arrived:");
+            System.out.println(connPacket.address.toString());
+        }
 
         client.thread.join();
     }
