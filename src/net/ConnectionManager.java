@@ -30,9 +30,9 @@ public class ConnectionManager extends HashSet<Connection> {
      * @param addr Connection address (<code>InetAddress</code>)
      * @return Connection if exists, null otherwise
      */
-    public Connection get(InetAddress addr) {
+    public Connection get(InetAddress addr, int port) {
         for (Connection conn : this)
-            if (conn.getInetAddress().equals(addr))
+            if (conn.getInetAddress().equals(addr) && conn.getPort() == port)
                 return conn;
 
         return null;

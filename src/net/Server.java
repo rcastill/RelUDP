@@ -62,6 +62,8 @@ public class Server extends DatagramSocket {
 
             BackClient client = (BackClient) clients.get(addr);
 
+            System.out.println("Packet received from: " + packet.getAddress().toString() +":"+ packet.getPort());
+
             // Add client
             if (client == null) {
                 client = new BackClient(this, addr, port);
